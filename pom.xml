@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.6.0</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+
+	<groupId>social-network-332901</groupId>
+	<artifactId>Social_Network</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Social_Network</name>
+	<description>Creation of a Social network for master</description>
+	<properties>
+		<java.version>11</java.version>
+
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<endpoints.framework.version>2.2.1</endpoints.framework.version>
+		<endpoints.management.version>1.0.12</endpoints.management.version>
+
+		<checkstyle.skip>true</checkstyle.skip>
+
+		<endpoints.project.id>web-cloud-326712</endpoints.project.id>
+
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+
+		<!-- Compile/runtime dependencies -->
+		<dependency>
+			<groupId>com.google.endpoints</groupId>
+			<artifactId>endpoints-framework</artifactId>
+			<version>${endpoints.framework.version}</version>
+		</dependency>
+		<!-- [START api_management] -->
+		<dependency>
+			<groupId>com.google.endpoints</groupId>
+			<artifactId>endpoints-management-control-appengine-all</artifactId>
+			<version>1.0.12</version>
+		</dependency>
+		<!-- [END api_management] -->
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-api-1.0-sdk</artifactId>
+			<version>1.9.79</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<!-- for hot reload of the web application-->
+		<outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes
+		</outputDirectory>
+		<plugins>
+
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.5.5</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.3</version>
+				<configuration>
+					<webResources>
+						<resources>
+							<directory>${basedir}/src/main/webapp/WEB-INF</directory>
+							<filtering>true</filtering>
+							<targetPath>WEB-INF</targetPath>
+						</resources>
+					</webResources>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>appengine-maven-plugin</artifactId>
+				<version>2.2.0</version>
+				<configuration>
+					<!-- deploy configuration -->
+					<projectId>GCLOUD_CONFIG</projectId>
+					<version>GCLOUD_CONFIG</version>
+				</configuration>
+			</plugin>
+			<!-- [START endpoints_plugin] -->
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>endpoints-framework-maven-plugin</artifactId>
+				<version>2.0.1</version>
+				<configuration>
+					<!-- plugin configuration -->
+					<hostname>${endpoints.project.id}.appspot.com</hostname>
+				</configuration>
+			</plugin>
+			<!-- [END endpoints_plugin] -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<version>2.7</version>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>display-dependency-updates</goal>
+							<goal>display-plugin-updates</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
